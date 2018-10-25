@@ -79,18 +79,33 @@ const makeCycler = function (array) {
   }
 }
 
+const makeFiboGenerator = function (num1,num2) {
 
+  let firstNumber = 0;
+  let secondNumber = 1;
+  if(num1 && num2){
+    firstNumber = num1;
+    secondNumber = num2;
+  }
+  if(num1 && !num2){
+    secondNumber= num1;
+  }
 
+  return function () {
+    let sum = firstNumber+secondNumber;
+    let  result = firstNumber;
+    firstNumber = secondNumber;
+    secondNumber = sum;
+    return result;
 
+  }
+}
 
-
-/*const makeFiboGenerator = undefined;
-*/
 exports.makeConstant=makeConstant;
 exports.makeCounterFromN=makeCounterFromN;
 exports.makeCounterFromZero=makeCounterFromZero;
 exports.makeDeltaTracker=makeDeltaTracker;
 exports.compose=compose;
 exports.curry=curry;
-//exports.makeFiboGenerator=makeFiboGenerator;
+exports.makeFiboGenerator=makeFiboGenerator;
 exports.makeCycler=makeCycler;
