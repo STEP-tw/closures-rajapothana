@@ -62,8 +62,29 @@ const curry = function (func,source1) {
   }
 }
 
+const makeCycler = function (array) {
+  let count = 0;
+  let newArray = array.slice(0,lengthOf(array));
+  return function () {
+    let length = lengthOf(newArray)
+    if(count == length){
+      count = 0;
+    }
+
+    if(length <= 1){
+      return array[count];
+    }else{
+      return array[count++];
+    }
+  }
+}
+
+
+
+
+
+
 /*const makeFiboGenerator = undefined;
-const makeCycler = undefined;
 */
 exports.makeConstant=makeConstant;
 exports.makeCounterFromN=makeCounterFromN;
@@ -72,4 +93,4 @@ exports.makeDeltaTracker=makeDeltaTracker;
 exports.compose=compose;
 exports.curry=curry;
 //exports.makeFiboGenerator=makeFiboGenerator;
-//exports.makeCycler=makeCycler;
+exports.makeCycler=makeCycler;
