@@ -18,17 +18,28 @@ const makeCounterFromZero = function () {
   }
 }
 
-/*const makeDeltaTracker = undefined;
-const makeFiboGenerator = undefined;
+const makeDeltaTracker = function (firstArgv) {
+  let DeltaTracker = {old: firstArgv,delta:0,new:firstArgv}; 
+  return function (secondArgv) {
+    DeltaTracker.old = DeltaTracker.new;
+    if(secondArgv){
+      DeltaTracker.delta = secondArgv;
+      DeltaTracker.new = DeltaTracker.old + DeltaTracker.delta;
+      return DeltaTracker;
+    }
+    return DeltaTracker;
+  }
+}
+
+  /*const makeFiboGenerator = undefined;
 const makeCycler = undefined;
-const curry = undefined;
 const compose = undefined;
 */
-exports.makeConstant=makeConstant;
-exports.makeCounterFromN=makeCounterFromN;
-exports.makeCounterFromZero=makeCounterFromZero;
-/*exports.makeDeltaTracker=makeDeltaTracker;
-exports.makeFiboGenerator=makeFiboGenerator;
+  exports.makeConstant=makeConstant;
+  exports.makeCounterFromN=makeCounterFromN;
+  exports.makeCounterFromZero=makeCounterFromZero;
+  exports.makeDeltaTracker=makeDeltaTracker;
+  //exports.curry=curry;
+  /*exports.makeFiboGenerator=makeFiboGenerator;
 exports.makeCycler=makeCycler;
-exports.curry=curry;
 exports.compose=compose;*/
