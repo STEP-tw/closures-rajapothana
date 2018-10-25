@@ -39,14 +39,28 @@ const concatWith=function(arrayToConcatWith,anotherArray) {
 };
 
 
-const compose = function (arg1,arg2) {
+const compose = function (func1,func2) {
   return function (source1,source2) {
-    return arg1(arg2(source1,source2));
+    return func1(func2(source1,source2));
   }
 }
 
+const sum=function(a,b) { return a+b };
 
 
+const isBetween=function(number,lowerLimit,upperLimit) {
+  return lowerLimit<=number && number<=upperLimit;
+};
+
+const paintCar=function(color,make,model) {
+  return {color,make,model};
+};
+
+const curry = function (func,source1) {
+  return function (source2,source3) {
+    return func(source1,source2,source3);
+  }
+}
 
 /*const makeFiboGenerator = undefined;
 const makeCycler = undefined;
@@ -56,6 +70,6 @@ exports.makeCounterFromN=makeCounterFromN;
 exports.makeCounterFromZero=makeCounterFromZero;
 exports.makeDeltaTracker=makeDeltaTracker;
 exports.compose=compose;
-//exports.curry=curry;
+exports.curry=curry;
 //exports.makeFiboGenerator=makeFiboGenerator;
 //exports.makeCycler=makeCycler;
