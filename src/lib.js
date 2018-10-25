@@ -72,9 +72,9 @@ const makeCycler = function (array) {
     }
 
     if(length <= 1){
-      return array[count];
+      return newArray[count];
     }else{
-      return array[count++];
+      return newArray[count++];
     }
   }
 }
