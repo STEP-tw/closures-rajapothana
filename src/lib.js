@@ -12,49 +12,22 @@ const makeCounterFromN = function (argv) {
 }
 
 const makeCounterFromZero = function () {
-  let count = 0;
-  return function () {
-    return count++;
-  }
+  return makeCounterFromN(0);
 }
 
 const makeDeltaTracker = function (firstArgv) {
-  let DeltaTracker = {old: firstArgv,delta:0,new:firstArgv}; 
-  return function (secondArgv) {
-    DeltaTracker.old = DeltaTracker.new;
-    if(secondArgv){
-      DeltaTracker.delta = secondArgv;
-      DeltaTracker.new = DeltaTracker.old + DeltaTracker.delta;
-      return DeltaTracker;
-    }
-    return DeltaTracker;
-  }
-}
-const lengthOf=function(collection) {return collection.length};
-const decrement=function(number){return number-1};
-const isNotZero=function(x) {return x!=0};
-const removeZeroes=function(array) {return array.filter(isNotZero)};
-const concatWith=function(arrayToConcatWith,anotherArray) {
-  return arrayToConcatWith.concat(anotherArray);
-};
-
-
-const compose = function (func1,func2) {
-  return function (source1,source2) {
-    return func1(func2(source1,source2));
+  return function (secondArgv = 0) {
+    firstArgv = firstArgv + secondArgv;
+    return {old:firstArgv - secondArgv,delta:secondArgv,new:firstArgv}
   }
 }
 
-const sum=function(a,b) { return a+b };
 
-
-const isBetween=function(number,lowerLimit,upperLimit) {
-  return lowerLimit<=number && number<=upperLimit;
-};
-
-const paintCar=function(color,make,model) {
-  return {color,make,model};
-};
+const compose = function (outerFunction,innerFunction) {
+  return function (firstArgument,secondArgument) {
+    return outerFunction(innerFunction(firstArgument,secondArgument));
+  }
+}
 
 const curry = function (func,source1) {
   return function (source2,source3) {
@@ -62,20 +35,15 @@ const curry = function (func,source1) {
   }
 }
 
-const makeCycler = function (array) {
+const makeCycler = function (list) {
   let count = 0;
-  let newArray = array.slice(0,lengthOf(array));
+  let newList = list.slice();
   return function () {
-    let length = lengthOf(newArray)
+    let length = (newList.length)
     if(count == length){
       count = 0;
     }
-
-    if(length <= 1){
-      return newArray[count];
-    }else{
-      return newArray[count++];
-    }
+      return newList[count++];
   }
 }
 
